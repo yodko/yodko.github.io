@@ -16,17 +16,21 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-x: hidden;   /* belt + braces on narrow phones */
   }
   .logo {
     font-family: "Rubik Mono One", sans-serif;
-    font-size: 10rem;
+    /* clamp(min, fluid, max) — 18vw is the sweet spot that keeps the
+       logo at ~full width on any viewport without hard breakpoints. */
+    font-size: clamp(3.5rem, 18vw, 10rem);
     color: #fff;
     line-height: 1;
     display: flex;
+    justify-content: center;
   }
   /* Per-letter kerning. Negative margins pull letters closer; Y and K
      need extra pulling because their shapes leave visual air at the
-     top / top-right. Tweak by 0.01em increments when retuning. */
+     top / top-right. em-based so it scales with the clamp above. */
   .logo .l-y  { margin-right: -0.13em; }
   .logo .l-o1 { margin-right: -0.05em; }
   .logo .l-d  { margin-right: -0.07em; }
@@ -35,11 +39,14 @@
 
   .subtitle {
     font-family: "Courier New", monospace;
-    font-size: 1.45rem;
+    /* Both font-size and letter-spacing scale fluidly so the subtitle
+       never overflows the viewport on mobile. */
+    font-size: clamp(0.7rem, 2.3vw, 1.45rem);
+    letter-spacing: clamp(0.18em, 0.8vw, 0.45em);
     color: #fff;
-    letter-spacing: 0.45em;
     text-align: center;
-    margin-top: 0.75rem;
+    margin-top: clamp(0.4rem, 1.2vw, 0.75rem);
+    padding: 0 0.5rem;
   }
 </style>
 </head>
